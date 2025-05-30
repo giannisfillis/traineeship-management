@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Evaluate Traineeship Position</title>
+</head>
+
+<body>
+	
+	<div class="container">
+			
+		<p class="h4 mb-4"> Evaluate Traineeship Position </p>
+	
+		<form action="#" th:action="@{/company/save_evaluation}"
+						 th:object="${evaluation}" method="POST">
+						 
+			
+		
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" name="selected_position_id" th:value="${position.id}" />
+			<h5 class="text-primary mb-3" th:text="'Evaluate Student: ' + ${position.assignedStudent} + ' in position: ' + ${position.title} ">Evaluate Student: [Name] in position: [Title]</h5>
+			
+			<label for="html">Motivation</label>
+			<input type="number" th:field="*{motivationGrade}"
+					class="form-control mb-4 col-4" placeholder="1 to 5" min="1" max="5" required> 
+
+			<label for="html">Efficiency</label>
+			<input type="number" th:field="*{efficiencyGrade}"
+					class="form-control mb-4 col-4" placeholder="1 to 5" min="1" max="5" required>
+					
+			<label for="html">Effectiveness</label>
+			<input type="number" th:field="*{effectivenessGrade}"
+					class="form-control mb-4 col-4" placeholder="1 to 5" min="1" max="5" required>
+					
+    		
+			<button type="submit" class="btn btn-info col-2">Save</button>
+						
+		</form>
+	
+		<hr>
+		
+		<a th:href="@{/company/assigned_positions}" class="btn btn-secondary">Back to Assigned Positions</a>
+		<a th:href="@{/company/dashboard}" class="btn btn-secondary ml-2">Back to Dashboard</a>
+		
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Grade Traineeship Position</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="container">
+
+    <p class="h4 mb-4">Grade Traineeship Position</p>
+
+  
+    <h5 class="text-primary mb-3"
+        th:text="'Company: ' + ${position.offeringCompany} + ' | Title: ' + ${position.title}">Company: [Name] | Title: [Title]</h5>
+
+    <!-- student evaluation by company -->
+    <div class="card mb-3">
+        <div class="card-header font-weight-bold">Student Evaluation by Company</div>
+        <div class="card-body">
+            <p th:text="'Motivation: ' + ${student_evaluation_bycompany.motivationGrade}"></p>
+            <p th:text="'Efficiency: ' + ${student_evaluation_bycompany.efficiencyGrade}"></p>
+            <p th:text="'Effectiveness: ' + ${student_evaluation_bycompany.effectivenessGrade}"></p>
+        </div>
+    </div>
+
+    <!-- student evaluation by professor -->
+    <div class="card mb-3">
+        <div class="card-header font-weight-bold">Student Evaluation by Supervisor</div>
+        <div class="card-body">
+            <p th:text="'Motivation: ' + ${student_evaluation_byprofessor.motivationGrade}"></p>
+            <p th:text="'Efficiency: ' + ${student_evaluation_byprofessor.efficiencyGrade}"></p>
+            <p th:text="'Effectiveness: ' + ${student_evaluation_byprofessor.effectivenessGrade}"></p>
+        </div>
+    </div>
+
+    <!-- company evaluation -->
+    <div class="card mb-4">
+        <div class="card-header font-weight-bold">Company Evaluation</div>
+        <div class="card-body">
+            <p th:text="'Facilities: ' + ${company_evaluation.facilitiesGrade}"></p>
+            <p th:text="'Guidance: ' + ${company_evaluation.guidanceGrade}"></p>
+        </div>
+    </div>
+
+  
+    <form th:action="@{/committee/save_grade}" th:object="${position}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label for="grade">Final Grade</label>
+			<select class="form-control mb-4 col-4" th:field="*{passFailGrade}" required>
+    			<option th:value="true">Pass</option>
+    			<option th:value="false">Fail</option>
+			</select>
+        </div>
+
+        <button type="submit" class="btn btn-success col-2">Save</button>
+        <a th:href="@{/committee/dashboard}" class="btn btn-secondary ml-2">Back to Dashboard</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>
