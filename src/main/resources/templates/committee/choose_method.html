@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+        crossorigin="anonymous">
+
+    <title>Position Search Form</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h3>Position Search Form</h3>
+        <hr>
+
+        <form th:action="@{/committee/available_positions}" method="post">
+            
+            <input type="hidden" name="selected_student_username" th:value="${student.username}" />
+
+            <h5 class="text-primary mb-3" th:text="'Choose for student: ' + ${student.studentName}">Choose for student: [Name]</h5>
+
+            <label for="strategy">Search Strategy</label>
+            <ul>
+                <li>
+                    <input type="radio" id="location" name="selectedStrategy" value="Location" required>
+                    <label for="location">Location Based</label>
+                </li>
+                <li>
+                    <input type="radio" id="interests" name="selectedStrategy" value="Interests" required>
+                    <label for="interests">Interests Based</label>
+                </li>
+                 <li>
+                    <input type="radio" id="interests" name="selectedStrategy" value="Composite" required>
+                    <label for="interests">Interests and Location Based</label>
+                </li>
+            </ul>
+
+            <button type="submit" class="btn btn-info col-2">Search</button>
+        </form>
+
+        <hr>
+       <div class="d-flex justify-content-between mt-4">
+	<a th:href="@{/committee/applied_students}" class="btn btn-secondary">Back to Applied Students</a>
+	</div>
+
+    </div>
+
+</body>
+</html>

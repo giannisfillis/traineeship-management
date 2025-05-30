@@ -1,0 +1,49 @@
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+        crossorigin="anonymous">
+
+    <title>Supervisor Assignment Form</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h3>Supervisor Assignment Form</h3>
+        <hr>
+
+        <form th:action="@{/committee/assign_supervisor}" method="post">
+            
+            <input type="hidden" name="selected_position" th:value="${position.id}" />
+
+            <h5 class="text-primary mb-3" th:text="'Choose for Position: ' + ${position.title} + ' with id: ' + ${position.id} ">Choose for Position: [Title] with id: [ID]</h5>
+
+            <label for="strategy">Supervisor Assignment Strategy</label>
+            <ul>
+                <li>
+                    <input type="radio" id="load" name="selectedStrategy" value="Load" required>
+                    <label for="location">Load Based</label>
+                </li>
+                <li>
+                    <input type="radio" id="interests" name="selectedStrategy" value="Interests" required>
+                    <label for="interests">Interests Based</label>
+                </li>
+            </ul>
+
+            <button type="submit" class="btn btn-sm btn-success"  onclick="if (!(confirm('You are about to assign a professor to this position'))) return false">Assign</button>
+        </form>
+
+        <hr>
+       <div class="d-flex justify-content-between mt-4">
+	<a th:href="@{/committee/inprogress_positions}" class="btn btn-secondary">Back to In-Progress Positions</a>
+	</div>
+
+    </div>
+
+</body>
+</html>

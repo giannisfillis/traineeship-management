@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Student Profile</title>
+</head>
+
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Student Profile</p>
+
+        <!-- Form for profile -->
+        <form action="#" th:action="@{/student/save_profile}"
+              th:object="${student}" method="POST">
+              
+              <div th:if="${dbError}" class="error-message" style="color: red; margin-bottom: 1rem;">
+       			 <p th:text="${dbError}"></p>
+    		</div>
+
+            <!-- Add hidden form field to handle update -->
+            <input type="hidden" th:field="*{username}" />
+
+            <!-- Full Name -->
+            <label for="html">Full Name</label>
+            <input type="text" th:field="*{studentName}"
+                   class="form-control mb-4 col-4"
+                   th:value="*{studentName} != null ? ${student.studentName} : ''" />
+
+            <!-- AM (Student ID) -->
+            <label for="html">AM</label>
+            <input type="text" th:field="*{AM}"
+                   class="form-control mb-4 col-4"
+                   th:value="*{AM} != null ? ${student.AM} : ''" />
+
+            <!-- Average Grade -->
+            <label for="html">Average Grade</label>
+            <input type="text" th:field="*{avgGrade}"
+                   class="form-control mb-4 col-4"
+                   th:value="*{avgGrade} != null ? ${student.avgGrade} : ''" />
+
+            <!-- Preferred Location -->
+            <label for="html">Preferred Location</label>
+            <input type="text" th:field="*{preferredLocation}"
+                   class="form-control mb-4 col-4"
+                   th:value="*{preferredLocation} != null ? ${student.preferredLocation} : ''" />
+
+            <!-- Skills -->
+            <label for="html">Skills</label>
+            <input type="text" th:field="*{skills}"
+                   class="form-control mb-4 col-4"
+                   th:value="*{skills} != null ? ${student.skills} : ''" />
+
+            <!-- Interests -->
+            <label for="html">Interests</label>
+            <input type="text" th:field="*{interests}"
+                   class="form-control mb-4 col-4"
+                   th:value="*{interests} != null ? ${student.interests} : ''" />
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-info col-2">Save</button>
+
+        </form>
+
+        <!-- Back link -->
+        <hr>
+        <a th:href="@{/student/dashboard}">Back to User Dashboard</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+create database if not exists traineeship_management;
+use traineeship_management;
+
+
+create table companies (
+	company_name varchar(255), 
+	location varchar(255), 
+	username varchar(255) not null,
+	primary key (username)
+) engine=InnoDB;
+
+create table evaluations (
+	e_id integer not null auto_increment, 
+	effectiveness integer, 
+    efficiency integer, 
+    facilities integer, 
+    guidance integer, 
+    motivation integer, 
+    traineeship_id integer, 
+    dtype varchar(31) not null, 
+    primary key (e_id)
+) engine=InnoDB;
+
+create table professors (
+	interests varchar(255),
+    professor_name varchar(255), 
+    username varchar(255) not null, 
+    primary key (username)
+) engine=InnoDB;
+
+create table students (
+	avg_grade float(53), 
+	looking_ts bit,
+    am varchar(255),
+    interests varchar(255), 
+    prefered_location varchar(255), 
+    skills varchar(255), 
+    student_name varchar(255), 
+    username varchar(255) not null, 
+    primary key (username)
+) engine=InnoDB;
+
+create table traineeship_positions (
+	grade bit,
+	is_assigned bit,
+    t_id integer not null auto_increment,
+    assigned_student varchar(255), 
+    descr varchar(255), 
+    end_date varchar(255),
+    logbook varchar(255), 
+    offering_company varchar(255), 
+    skills varchar(255),
+    start_date varchar(255),
+    supervisor varchar(255),
+    title varchar(255), 
+    topics varchar(255),
+    primary key (t_id)
+) engine=InnoDB;
+
+create table users (
+	password varchar(255),
+    username varchar(255) not null,
+    role enum ('COMMITTEE','COMPANY','PROFESSOR','STUDENT'),
+    primary key (username)
+) engine=InnoDB;
+
+
+
+alter table traineeship_positions 
+add constraint UK3dkylppx03caitp1x39mwnoqs unique (assigned_student);
+
+alter table evaluations
+add constraint FKc9i74bx66cvpbwrxidk6eh8j5
+foreign key (traineeship_id) references traineeship_positions (t_id);
+
+alter table traineeship_positions 
+add constraint FKlptyvniw2g0eclqppsh84jexo 
+foreign key (assigned_student) references students (username);
+
+alter table traineeship_positions 
+add constraint FKbw0shovenqdkp1n9hjuetxgo0 
+foreign key (offering_company) references companies (username);
+
+alter table traineeship_positions 
+add constraint FKbnxxhmm0p71tckoy6umt4d4dp
+foreign key (supervisor) references professors (username);
+
+alter table traineeship_management.evaluations add column by_company bit;

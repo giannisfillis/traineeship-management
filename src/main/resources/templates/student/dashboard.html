@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Student Dashboard</title>
+</head>
+
+
+<body>
+<div class="container">
+
+  <h2>Welcome to the Student Dashboard</h2>
+  
+  <br> <br> <hr> <br> <br>
+  
+  <h4>Logged as: <span sec:authentication="name"></span></h4>
+  <h4>Has role: <span sec:authentication="authorities"></span></h4>
+  <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+  <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+	<br> <br> <hr> <br> <br>
+    <p>
+    	<a th:href="@{/student/dashboard}" class="btn btn-primary btn-sm mb-3">Home</a>
+    	<a th:href="@{/student/profile}" class="btn btn-primary btn-sm mb-3">Profile</a>
+    	<a	th:href="@{/student/apply_for_position}"
+  		 	 class="btn btn-primary btn-sm mb-3"
+					   onclick="if (!(confirm('You are about to apply for a Traineeship Position. Are you sure you want to proceed?'))) return false">
+						I am looking for a Traineeship!
+		</a>
+		<a th:href="@{/student/logbook}" class="btn btn-primary btn-sm mb-3">My LogBook</a>
+		<a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+    
+    </p>
+</div>
+  
+  
+</body>
+</html>

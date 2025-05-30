@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>My Supervising Positions Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>My Supervising Positions Directory</h3>
+	<hr>
+	
+	<div th:if="${error}" class="alert alert-danger" role="alert">
+    	<p th:text="${error}"></p>
+	</div>
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th style="width: 5%;">Position Id</th>
+				<th style="width: 10%;">Title</th>
+				<th style="width: 10%;">Offered By</th>
+				<th style="width: 10%;">Assigned To</th>
+				<th style="width: 10%;">Start Date</th>
+				<th style="width: 10%;">End Date</th>
+				<th style="width: 15%;">Required Skills</th>
+				<th style="width: 15%;">Topics Of Interests</th>
+				<th style="width: 5%;">Options</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="position : ${positions}">
+			
+				<td th:text="${position.id}" />	
+				<td th:text="${position.title}" />	
+				<td th:text="${position.offeringCompany}" />
+				<td th:text="${position.assignedStudent}" />
+				<td th:text="${position.startDate}" />
+				<td th:text="${position.endDate}" />
+				<td th:text="${position.requiredSkills}" />
+				<td th:text="${position.topics}" />		
+				<td>
+					
+					<a th:href="@{/professor/evaluate_student(selected_position_id=${position.id})}"
+					   	class="btn btn-primary btn-sm mb-3">
+						Evaluate Student
+					</a>
+					<a th:href="@{/professor/evaluate_company(selected_position_id=${position.id})}"
+					   	class="btn btn-primary btn-sm mb-3">
+						Evaluate Company
+					</a>
+								
+				</td>
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+	<a th:href="@{/professor/dashboard}" class="btn btn-secondary ml-2">Back to Dashboard</a>
+	
+</div>
+	
+</body>
+</html>
